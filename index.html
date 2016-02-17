@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,40 +5,15 @@
   <meta name="robots" content="noindex, nofollow">
   <meta name="googlebot" content="noindex, nofollow">
 
-  
-  
-
-  
-  
-  
-
-  
-
   <script type="text/javascript" src="//code.jquery.com/jquery-1.9.1.js"></script>
 
-  
-
-  
-
-  
-
-  
     <link rel="stylesheet" type="text/css" href="/css/result-light.css">
-  
-
-  
 
   <style type="text/css">
     
   </style>
 
   <title></title>
-
-  
-    
-
-
-
 
 <script type='text/javascript'>//<![CDATA[
 
@@ -60,16 +34,7 @@ $(function() {
               parseFloat(row.value)
             ]);
         });
-        
-        
-        
-        /*for (i = 0; i < xively_datapoints.length; i++) {
-            chartdata.push([
-                Date.parse(xively_datapoints[i].at),
-                parseFloat(xively_datapoints[i].value)
-            ]);
-        }*/
-        
+
 		// Create the chart
 		$('#container').highcharts('StockChart', {
 			rangeSelector : {
@@ -90,9 +55,10 @@ $(function() {
 			series : [{
 				name : 'Home Power Monitor',
 				data : chartdata,
-				tooltip: {
-					valueDecimals: 2
-				}
+                		type: 'spline',
+                		tooltip: {
+                    			valueDecimals: 0
+                		}
 			}]
 		});
 	});
