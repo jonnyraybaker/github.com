@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- EXTERNAL LIBS-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type='text/javascript' src='https://www.gstatic.com/charts/loader.js'></script>
+    <script src="https://www.google.com/jsapi"></script>
+	
+	<script type='text/javascript'>
+      google.charts.load('current', {'packages':['annotatedtimeline']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      // onload callback
+      function drawChart() {
+
+        //fetch data from xively
+		$.getJSON('https://api.xively.com/v2/feeds/2134151370/datastreams/Aeon_Home_Energy_Meter_energymeter.power.json?&key=UNlTns1Yd5nPeXNYk1Xq3zNlpP0Du2stvtL0WSq5QaJ5asS7&per_page=1000&datastreams=0,7&duration=6hours&interval=0&callback=?', function(results) { //Xively
+
+          var data = new google.visualization.DataTable();
+
+          data.addColumn('datetime', 'Time');
+          data.addColumn('number', 'Watts');
+          
+          $.each(results.datapoints, function (i, row) {
+            data.addRow([
+              (new Date(row.at)),
+              parseFloat(row.value)
+            ]);
+          });
+
+          var chart = new google.visualization.AnnotatedTimeLine(document.getElementById('chart_div'));
+		  chart.draw(data, {displayAnnotations: true});
+        });
+
+      }
+
+      // load chart lib
+      google.load('visualization', '1', {
+        packages: ['corechart']
+      });
+
+      // call drawChart once google charts is loaded
+      google.setOnLoadCallback(drawChart);
+
+    </script>
+
+  </head>
+  <body>
+        <div id="chart_div" style="width: 900px; height: 500px"></div>
+
+  </body>
+</html>
