@@ -72,14 +72,10 @@ $(function() {
         
 		// Create the chart
 		$('#container').highcharts('StockChart', {
-			
-
 			rangeSelector : {
 				selected : 1
 			},
-
-			 exporting: {
-                  
+			 exporting: {                  
                     chartOptions:{		               
 	                   yAxis: {
 		                    labels: {
@@ -88,11 +84,9 @@ $(function() {
                                     fontSize: '14px'
 		                        }
 		                    }
-	                    }
-	                   
+	                    }	                   
 		            }
-             },
-			
+             },			
 			series : [{
 				name : 'Home Power Monitor',
 				data : chartdata,
