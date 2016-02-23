@@ -32,39 +32,39 @@ $(function() {
 	              parseFloat(row.value)
 	            ]);
 	        });
-	});	
-		
+
 		// Create the chart
 		$('#container').highcharts('StockChart', {
 			rangeSelector : {
 				selected : 1
 			},
-			 exporting: {                  
-                    chartOptions:{		               
-	                   yAxis: {
-		                    labels: {
-		                        style: {
-		                            color: '#000',
-                                    fontSize: '14px'
-		                        }
-		                    }
-	                    }	                   
-		            }
-             },			
+			exporting: {
+				chartOptions:{
+					yAxis: {
+						labels: {
+							style: {
+								color: '#000',
+								fontSize: '14px'
+							}
+						}
+					}
+				}
+			},
+
 			series : [{
 				name : 'Home Power Monitor',
 				data : chartdata,
-      		                step: true,
-                		tooltip: {
-                    			valueDecimals: 0
-                		}
+				step: true,
+				tooltip: {
+					valueDecimals: 0
+				}
 			}]
 		});
+	});	
 });
 //]]> 
 </script>
 
-  
 </head>
 
 <body>
