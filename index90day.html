@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
+
+  <script type="text/javascript" src="//code.jquery.com/jquery-1.9.1.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/css/result-light.css">
+
+  <style type="text/css">
+    
+  </style>
+
+  <title></title>
+
+<script type='text/javascript'>//<![CDATA[
+$(function() {
+    
+    Highcharts.setOptions({
+        global: {
+            useUTC: false
+            //timezoneOffset: 6*60 //7*60 is for MDT
+        }
+    });
+	$.getJSON('https://api.xively.com/v2/feeds/2134151370/datastreams/Aeon_Home_Energy_Meter_energymeter.power.json?&key=UNlTns1Yd5nPeXNYk1Xq3zNlpP0Du2stvtL0WSq5QaJ5asS7&per_page=1000&datastreams=0,7&duration=90days&interval=10800&callback=?', function(data) {
+        var chartdata = [];
+        
+        $.each(data.datapoints, function (i, row) {
+            chartdata.push([
+              Date.parse(row.at),
+              parseFloat(row.value)
+            ]);
+        });
+		// Create the chart
+		$('#container').highcharts('StockChart', {
+			rangeSelector : {
+				selected : 1
+			},
+			 exporting: {                  
+                    chartOptions:{		               
+	                   yAxis: {
+		                    labels: {
+		                        style: {
+		                            color: '#000',
+                                    fontSize: '14px'
+		                        }
+		                    }
+	                    }	                   
+		            }
+             },			
+			series : [{
+				name : 'Home Power Monitor',
+				data : chartdata,
+      		                step: true,
+                		tooltip: {
+                    			valueDecimals: 0
+                		}
+			}]
+		});
+	});
+});
+//]]> 
+</script>
+
+  
+</head>
+
+<body>
+  <script src="http://code.highcharts.com/stock/highstock.js"></script>
+
+
+<div id="container" style="height: 500px; min-width: 500px"></div>
+  
+</body>
+
+</html>
